@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#quiz-container {
+  background-color: #fff;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#question-container {
+  margin-bottom: 20px;
+}
+
+#answer-input {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#result-container {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+    </style>
+  <title>Quiz Game</title>
+</head>
+<body>
+  <div id="quiz-container">
+    <h1>Quiz Game</h1>
+    <div id="question-container">
+      <p id="question-text"></p>
+      <input type="text" id="answer-input" placeholder="Your Answer">
+      <button onclick="checkAnswer()">Submit</button>
+    </div>
+    <div id="result-container"></div>
+    <button onclick="nextQuestion()">Next Question</button>
+  </div>
+  <script>
+    const questions = [
+  {
+    question: "What is the capital of France?",
+    answer: "Paris"
+  },
+  {
+    question: "Which planet is known as the Red Planet?",
+    answer: "Mars"
+  },
+  {
+    question: "What is the largest mammal?",
+    answer: "Blue Whale"
+  },
+  {
+    question: "Who wrote 'Romeo and Juliet'?",
+    answer: "William Shakespeare"
+  },
+  {
+    question: "What is the powerhouse of the cell?",
+    answer: "Mitochondria"
+  }
+];
+
+let currentQuestion = 0;
+
+function loadQuestion() {
+  const questionText = document.getElementById("question-text");
+  questionText.textContent = questions[currentQuestion].question;
+
+  const answerInput = document.getElementById("answer-input");
+  answerInput.value = "";
+
+  const resultContainer = document.getElementById("result-container");
+  resultContainer.textContent = "";
+}
+
+function checkAnswer() {
+  const userAnswer = document.getElementById("answer-input").value;
+  const resultContainer = document.getElementById("result-container");
+
+  if (userAnswer.toLowerCase() === questions[currentQuestion].answer.toLowerCase()) {
+    resultContainer.textContent = "Correct!";
+    resultContainer.style.color = "green";
+    document.body.style.backgroundColor = "#d4edda"; // Light green background
+  } else {
+    resultContainer.textContent = "Wrong!";
+    resultContainer.style.color = "red";
+    document.getElementById('quiz-container').style.backgroundColor = "#f8d7da"; // Light red background
+  }
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    loadQuestion();
+    document.body.style.backgroundColor = "#fff"; // Reset background color
+  } else {
+    alert("Quiz completed!");
+  }
+}
+
+// Initial load
+loadQuestion();
+
+  </script>
+</body>
+</html>
