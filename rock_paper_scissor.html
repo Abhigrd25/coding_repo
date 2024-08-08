@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock, Paper, Scissors Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rock, Paper, Scissors Game</h1>
+        <p>Choose your move:</p>
+        <button id="rock" class="btn btn-primary">Rock</button>
+        <button id="paper" class="btn btn-primary ml-2">Paper</button>
+        <button id="scissors" class="btn btn-primary ml-2">Scissors</button>
+        <p id="result" class="mt-2"></p>
+        <button id="play-again" class="btn btn-secondary mt-2">Play Again</button>
+    </div>
+
+    <script>
+        const moves = ["rock", "paper", "scissors"];
+
+        const rockButton = document.getElementById("rock");
+        const paperButton = document.getElementById("paper");
+        const scissorsButton = document.getElementById("scissors");
+        const result = document.getElementById("result");
+        const playAgainButton = document.getElementById("play-again");
+
+        function computerMove() {
+            const randomIndex = Math.floor(Math.random() * moves.length);
+            return moves[randomIndex];
+        }
+
+        function playGame(playerMove) {
+            const computer = computerMove();
+            if (playerMove === computer) {
+                result.textContent = "It's a tie!";
+            } else if (
+                (playerMove === "rock" && computer === "scissors") ||
+                (playerMove === "paper" && computer === "rock") ||
+                (playerMove === "scissors" && computer === "paper")
+            ) {
+                result.textContent = `You win! Computer chose ${computer}.`;
+            } else {
+                result.textContent = `You lose! Computer chose ${computer}.`;
+            }
+        }
+
+        rockButton.addEventListener("click", () => playGame("rock"));
+        paperButton.addEventListener("click", () => playGame("paper"));
+        scissorsButton.addEventListener("click", () => playGame("scissors"));
+
+        playAgainButton.addEventListener("click", () => {
+            result.textContent = "";
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
